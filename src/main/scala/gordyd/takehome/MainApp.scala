@@ -27,20 +27,38 @@ object MainApp extends App {
 
 class Salary(val net: Double, val locale: Locale) {
 
+  def tax = {
+    val low = 10000
+    val mid = 41866
+    val high = 160000
+    if (net <= low) {
+      0.00
+    } else if (net <= mid) {
+      (((net-low)/100)*20)
+    } else if (net < high) {
+      (((mid-low)/100)*20) + (((net-mid)/100)*40)
+    } else {
+      (((mid-low)/100)*20) + (((high-mid)/100)*40) + (((net-high)/100)*45)
+    }
+  }
+
+  def ni = {
+    val weekly = net/52
+    val low = 153
+    val high = 805
+    if (weekly < low) {
+      0.00
+    } else if (weekly >= low && weekly <= high) {
+      ((net-(low*52))/100)*12
+    } else {
+      ((((high-low)*52)/100)*12) + (((net-(high*52))/100)*2)
+    }
+  }
+
   def grossPercent = (2-(net/gross))
 
-  def gross = locale match {
-    case Locale.UK => {
-      if (net <= 10000) {
-        net
-      } else if (net <= 31865) {
-        10000 + (((net-10000)/100)*80)
-      } else if (net <= 150000) {
-        10000 + (((31865-10000)/100)*80) + (((net-31865)/100)*60)
-      } else {
-        10000 + (((31865-10000)/100)*80) + (((150000-31865)/100)*60) + (((net-150000)/100)*45)
-      }
-    }
-    case _ => net
+  def gross = {
+    println(net, tax, ni)
+    net - (tax + ni)
   }
 }
