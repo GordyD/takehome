@@ -39,16 +39,16 @@ class Salary$Test extends UnitSpec {
   it should "equal 26788.72 gross when 45050 net" in {
     val s = new Salary(45050, Locale.UK)
     s.net should be (45050)
-    s.gross should be (33270.22)
-    s.ni should be (4132.78)
-    s.tax should be (7647)
+    s.gross should be (33284.2)
+    s.ni should be (4131.8)
+    s.tax should be (7634)
   }
 
   it should "equal 52514.62 gross when 78230 net" in {
     val s = new Salary(78230, Locale.UK)
     s.net should be (78230)
-    s.gross should be (52514.62)
-    s.ni should be (4796.38)
-    s.tax should be (20919)
+    s.gross should be (52528.6)
+    s.ni should be (4795.4)
+    s.tax should be (20906)
   }
 }

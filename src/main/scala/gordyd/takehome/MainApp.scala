@@ -29,13 +29,13 @@ class Salary(val net: Double, val locale: Locale) {
 
   def tax = {
     val low = 10000
-    val mid = 41866
+    val mid = 41865
     val high = 160000
     if (net <= low) {
       0.00
     } else if (net <= mid) {
       (((net-low)/100)*20)
-    } else if (net < high) {
+    } else if (net <= high) {
       (((mid-low)/100)*20) + (((net-mid)/100)*40)
     } else {
       (((mid-low)/100)*20) + (((high-mid)/100)*40) + (((net-high)/100)*45)
